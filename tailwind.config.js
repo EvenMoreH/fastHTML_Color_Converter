@@ -5,7 +5,11 @@ module.exports = {
     "./app/**/*.py",    // Scan Python files (e.g., FastHTML components)
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "segoe-ui" : ['"Segoe UI"', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
+      }
+    },
   },
   plugins: [],
 }

@@ -614,20 +614,12 @@ video {
   display: flex;
 }
 
-.grid {
-  display: grid;
-}
-
 .h-16 {
   height: 4rem;
 }
 
 .w-60 {
   width: 15rem;
-}
-
-.max-w-3xl {
-  max-width: 48rem;
 }
 
 .flex-col {
@@ -642,30 +634,16 @@ video {
   justify-content: center;
 }
 
-.gap-8 {
-  gap: 2rem;
-}
-
 .bg-transparent {
   background-color: transparent;
 }
 
-.bg-zinc-950 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(9 9 11 / var(--tw-bg-opacity, 1));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+.p-1 {
+  padding: 0.25rem;
 }
 
 .p-2 {
   padding: 0.5rem;
-}
-
-.p-1 {
-  padding: 0.25rem;
 }
 
 .pb-1 {
@@ -674,10 +652,6 @@ video {
 
 .text-center {
   text-align: center;
-}
-
-.text-justify {
-  text-align: justify;
 }
 
 .text-2xl {
@@ -698,11 +672,6 @@ video {
 .text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity, 1));
-}
-
-.text-gray-200 {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity, 1));
 }
 
 /* EXAMPLE of reusable button style */
@@ -762,8 +731,55 @@ video {
   color: rgb(243 244 246 / var(--tw-text-opacity, 1));
 }
 
+.body {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .body {
+    max-width: 640px;
+  }
+}
+
 @media (min-width: 768px) {
-  .md\:grid-cols-2 {
+  .body {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .body {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .body {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .body {
+    max-width: 1536px;
+  }
+}
+
+.body {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  max-width: 48rem;
+  gap: 2rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(9 9 11 / var(--tw-bg-opacity, 1));
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --tw-text-opacity: 1;
+  color: rgb(243 244 246 / var(--tw-text-opacity, 1));
+}
+
+@media (min-width: 768px) {
+  .body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

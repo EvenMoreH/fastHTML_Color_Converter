@@ -8,7 +8,7 @@ import re
 app, rt = fast_app(static_path="app/static") # type: ignore
 
 
-default_header =  Head(
+default_header = Head(
                     Title("Color Converter"),
                     Meta(name="viewport", content="width=device-width, initial-scale=1"),
                     Script(src="https://unpkg.com/htmx.org"),
@@ -43,28 +43,34 @@ def hex_to_rgba(hex_color):
     if hex_color.startswith('#'):
         hex_color = hex_color[1:]
 
-    # check if the length of the hex string is valid (3, 6 or 8 characters)
-    if len(hex_color) not in [3, 6, 8]:
-        raise ValueError("Invalid hex color format")
+    # check if the length of the hex string is valid
+    if len(hex_color) > 8:
+        return "Invalid hex color format"
 
-    # if it's a 3-character hex code, expand it to 6
-    if len(hex_color) == 3:
-        hex_color = ''.join([c*2 for c in hex_color])
+    if len(hex_color) in [3, 6, 8]:
+        try:
+            # if it's a 3-character hex code, expand it to 6
+            if len(hex_color) == 3:
+                hex_color = ''.join([c*2 for c in hex_color])
 
-    # if it's an 8-character hex code, extract the alpha value
-    if len(hex_color) == 8:
-        r = int(hex_color[0:2], 16)
-        g = int(hex_color[2:4], 16)
-        b = int(hex_color[4:6], 16)
-        a = int(hex_color[6:8], 16) / 255.0  # convert to float (0.0 - 1.0)
+            # if it's an 8-character hex code, extract the alpha value
+            if len(hex_color) == 8:
+                r = int(hex_color[0:2], 16)
+                g = int(hex_color[2:4], 16)
+                b = int(hex_color[4:6], 16)
+                a = int(hex_color[6:8], 16) / 255.0  # convert to float (0.0 - 1.0)
+            else:
+                r = int(hex_color[0:2], 16)
+                g = int(hex_color[2:4], 16)
+                b = int(hex_color[4:6], 16)
+                a = 1.0  # assuming full opacity by default
+
+            result = f"RGBA({r},{g},{b},{a:.2f})"
+            return result
+        except:
+            return "Invalid hex color format"
     else:
-        r = int(hex_color[0:2], 16)
-        g = int(hex_color[2:4], 16)
-        b = int(hex_color[4:6], 16)
-        a = 1.0  # assuming full opacity by default
-
-    result = f"RGBA({r},{g},{b},{a:.2f})"
-    return result
+        return "Invalid hex color format"
 
 
 def rgba_to_hex(r: int, g: int, b: int, a: float = 1.0):
@@ -126,13 +132,14 @@ def rgba_input_to_hex(input_str: str):
             r, g, b = int(parts[0]), int(parts[1]), int(parts[2])
             a = float(parts[3])
         else:
-            raise ValueError("Input must be in the format 'r,g,b' or 'r,g,b,a'")
+            return ('Input must be in the format "R,G,B" or "R,G,B,A"')
 
         # use rgba_to_hex function to handle conversion
         return rgba_to_hex(r, g, b, a)
 
-    except ValueError as e:
-        return f"Invalid input: {e}"
+    except:
+        return ('Input must be in the format "R,G,B" or "R,G,B,A"')
+
 
 
 @rt("/")
@@ -181,7 +188,7 @@ def get():
                 cls="div",
             ),
             # whole body css:
-            cls="bg-zinc-950 text-gray-100 max-w-3xl container mx-auto grid md:grid-cols-2 gap-8"
+            cls="body"
         )
     )
 
@@ -230,5 +237,3 @@ serve()
 # if __name__ == '__main__':
 #     # Important: Use host='0.0.0.0' to make the server accessible outside the container
 #     serve(host='0.0.0.0', port=5033) # type: ignore
-
-# #e5e7eb
