@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* EXAMPLE of reusable button style */
+.div {
+  @apply container mx-auto flex flex-col items-center
+}
+
+.input {
+  @apply bg-zinc-800 text-gray-100 border-gray-100 w-60 h-8 rounded-md p-2
+}
