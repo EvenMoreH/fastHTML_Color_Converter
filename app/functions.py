@@ -113,10 +113,10 @@ def rgba_input_to_hex(input_str: str):
             r, g, b = int(parts[0]), int(parts[1]), int(parts[2])
             a = float(parts[3])
         else:
-            return ('Input must be in the format "R,G,B" or "R,G,B,A"')
+            return ("Invalid RGB/RGBA format")
 
         # use rgba_to_hex function to handle conversion
         return rgba_to_hex(r, g, b, a)
 
     except:
-        return ('Input must be in the format "R,G,B" or "R,G,B,A"')
+        return ("Invalid RGB/RGBA format")

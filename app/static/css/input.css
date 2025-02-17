@@ -2,19 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* EXAMPLE of reusable button style */
+
+.body {
+  @apply font-segoe-ui bg-zinc-950 text-gray-100 max-w-5xl container mx-auto grid
+  md:grid-cols-2 gap-y-16 md:gap-y-24 gap-x-8 xl:grid-cols-3 transform scale-90 md:transform md:scale-100
+}
+
 .div {
   @apply container mx-auto flex flex-col items-center
 }
 
 .div-center {
-  @apply container mx-auto flex flex-col items-center md:transform md:translate-x-1/2
+  @apply container mx-auto flex flex-col items-center md:transform md:translate-x-1/2 xl:transform xl:translate-x-0
 }
 
 .input {
-  @apply bg-zinc-800 text-gray-100 border-gray-100 w-60 h-8 rounded-md p-2
+  @apply bg-zinc-800 text-gray-100 border-gray-100 w-60 h-7 md:h-8 rounded-md p-2
 }
 
-.body {
-  @apply font-segoe-ui bg-zinc-950 text-gray-100 max-w-3xl container mx-auto grid md:grid-cols-2 gap-y-12 md:gap-y-24 gap-x-8
+.label1 {
+  @apply p-0.5 m-0.5 text-xl md:p-2 md:m-2 md:text-2xl
+}
+
+.label2 {
+  @apply text-gray-400 pb-0.5 mb-0.5 text-lg md:text-xl md:pb-1 md:mb-1
+}
+
+.form1 {
+  @apply p-1 mt-12 md:p-2 md:mx-2 flex flex-col container justify-center items-center
+}
+
+.form2 {
+  @apply p-1 md:mt-12 md:p-2 md:mx-2 flex flex-col container justify-center items-center
+}
+
+.form3 {
+  @apply p-1 md:p-2 md:mx-2 xl:mt-12 flex flex-col container justify-center items-center
 }

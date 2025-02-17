@@ -3,10 +3,10 @@ from colors import tailwind_colors
 from functions import *
 
 # for Docker
-# app, rt = fast_app(static_path="static") # type: ignore
+app, rt = fast_app(static_path="static") # type: ignore
 
 # for local
-app, rt = fast_app(static_path="app/static") # type: ignore
+# app, rt = fast_app(static_path="app/static") # type: ignore
 
 
 default_header = Head(
@@ -24,21 +24,26 @@ def get():
     return Html(
         default_header,
         Body(
+            Div(
+                Span("Color Converter by "),
+                A("EvenMoreH", href="https://github.com/EvenMoreH", cls="text-gray-300 underline hover:scale-105 transition-all duration-250"),
+                cls="text-center fixed top-0 container p-2 bg-zinc-800 w-full rounded flex justify-center items-center space-x-1"
+            ),
             # hex code div
             Div(
                 Form(
-                    Label("Enter HEX Color Code", cls="p-2 m-2 text-2xl"),
-                    Label("Example: #22c55e", cls="text-xl text-gray-400 pb-1 mb-1"),
+                    Label("Enter HEX Color Code", cls="label1"),
+                    Label("Example: #22c55e", cls="label2"),
                     Input(id="hex-color-input", name="color", type="text", cls="input"),
                     hx_post="/hex_color",
                     hx_trigger="input",
                     hx_target="#hex-color-display",
-                    cls="p-2 mx-2 flex flex-col container justify-center items-center",
+                    cls="form1",
                 ),
                 # show color field
                 Div(
                     id="hex-color-display",
-                    cls="w-60 h-16 bg-transparent",
+                    cls="w-60 h-8 md:h-16 bg-transparent",
                 ),
                 # show rgba code
                 Div(
@@ -53,18 +58,18 @@ def get():
             # rgba div
             Div(
                 Form(
-                    Label("Enter RGBA Color Code", cls="p-2 m-2 text-2xl"),
-                    Label("Example: 235,92,3,0.85", cls="text-xl text-gray-400 pb-1 mb-1"),
+                    Label("Enter RGBA Color Code", cls="label1"),
+                    Label("Example: 235,92,3,0.85", cls="label2"),
                     Input(id="rgba-color-input", name="color", type="text", cls="input"),
                     hx_post="/rgba_color",
                     hx_trigger="input",
                     hx_target="#rgba-color-display",
-                    cls="p-2 mx-2 flex flex-col container justify-center items-center",
+                    cls="form2",
                 ),
                 # show color field
                 Div(
                     id="rgba-color-display",
-                    cls="w-60 h-16 bg-transparent",
+                    cls="w-60 h-8 md:h-16 bg-transparent",
                 ),
                 # show hex code
                 Div(
@@ -79,18 +84,18 @@ def get():
             # tailwind div
             Div(
                 Form(
-                    Label("Enter Tailwind Color Code", cls="p-2 m-2 text-2xl"),
-                    Label("Example: green-500", cls="text-xl text-gray-400 pb-1 mb-1"),
+                    Label("Enter Tailwind Color Code", cls="label1"),
+                    Label("Example: green-500", cls="label2"),
                     Input(id="tailwind-color-input", name="color", type="text", cls="input"),
                     hx_post="/tailwind_color",
                     hx_trigger="input",
                     hx_target="#tailwind-color-display",
-                    cls="p-2 mx-2 flex flex-col container justify-center items-center",
+                    cls="form3",
                 ),
                 # show color field
                 Div(
                     id="tailwind-color-display",
-                    cls="w-60 h-16 bg-transparent",
+                    cls="w-60 h-8 md:h-16 bg-transparent",
                 ),
                 # show hex code
                 Div(
@@ -127,13 +132,13 @@ def post(color: str):
     return Div(
         id="hex-color-display",
         hx_swap_oob=True,
-        cls="w-60 h-16",
+        cls="w-60 h-8 md:h-16",
         style=f"background-color: {rgba_value};",
         ), Div(
             f"{rgba_value}",
             id="rgba-color-value",
             hx_swap_oob=True,
-            cls="w-60 h-12 text-gray-100 text-center mx-auto p-1",
+            cls="w-60 h-6 text-gray-100 text-center mx-auto p-1",
         ), Div(
             f"Tailwind: {tailwind_hex}",
             id="hex-tailwind-color-value",
@@ -165,13 +170,13 @@ def post(color: str):
     return Div(
         id="rgba-color-display",
         hx_swap_oob=True,
-        cls="w-60 h-16",
+        cls="w-60 h-8 md:h-16",
         style=f"background-color: {rgba_color};",
         ), Div(
-            f"HEX: {hex_value}",
+            f"HEX: {hex_value_low}",
             id="hex-color-value",
             hx_swap_oob=True,
-            cls="w-60 h-12 text-gray-100 text-center mx-auto p-1",
+            cls="w-60 h-6 text-gray-100 text-center mx-auto p-1",
         ), Div(
             f"Tailwind: {tailwind_rgba}",
             id="rgba-tailwind-color-value",
@@ -191,23 +196,20 @@ def post(color: str):
             tailwind_color = value
             break
     else:
-        tailwind_color = "Color not found in the dictionary."
+        tailwind_color = "Color not found"
 
-    print(tailwind_color)
     rgba_value = hex_to_rgba(tailwind_color)
-    print(rgba_value)
-
 
     return Div(
     id="tailwind-color-display",
     hx_swap_oob=True,
-    cls="w-60 h-16",
+    cls="w-60 h-8 md:h-16",
     style=f"background-color: {tailwind_color};",
     ), Div(
         f"HEX: {tailwind_color}",
         id="hex-color-value",
         hx_swap_oob=True,
-        cls="w-60 h-12 text-gray-100 text-center mx-auto p-1",
+        cls="w-60 h-6 text-gray-100 text-center mx-auto p-1",
     ), Div(
         f"{rgba_value}",
         id="rgba-tailwind-color-value",
