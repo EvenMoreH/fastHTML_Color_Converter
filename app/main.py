@@ -218,8 +218,7 @@ def post(color: str):
     ),
 
 
-serve()
 
-# if __name__ == '__main__':
-#     # Important: Use host='0.0.0.0' to make the server accessible outside the container
-#     serve(host='0.0.0.0', port=5033) # type: ignore
+if __name__ == '__main__':
+    # Important: Use host='0.0.0.0' to make the server accessible outside the container
+    serve(host='0.0.0.0', port=5033) # type: ignore
