@@ -2,11 +2,11 @@ def string_cleaner(input_string: str, characters_to_remove):
     """
     Remove specified characters from the input string.
 
-    Parameters:
+    Parameters
     - input_string (str): The original string.
     - chars_to_remove (str): A string containing all characters to be removed.
 
-    Returns:
+    Returns
     - str: The modified string with specified characters removed.
     """
 
@@ -58,14 +58,14 @@ def rgba_to_hex(r: int, g: int, b: int, a: float = 1.0):
     """
     Convert RGBA value to Hex color code.
 
-    Parameters:
-    r (int): Red component (0-255)
-    g (int): Green component (0-255)
-    b (int): Blue component (0-255)
-    a (float): Alpha component (0.0-1.0, optional)
+    Parameters
+    - r (int): Red component (0-255)
+    - g (int): Green component (0-255)
+    - b (int): Blue component (0-255)
+    - a (float): Alpha component (0.0-1.0, optional)
 
-    Returns:
-    str: Hex color code
+    Returns
+    - str: Hex color code
     """
     # ensure the RGBA values are within valid ranges
     r = max(0, min(r, 255))
@@ -91,11 +91,11 @@ def rgba_input_to_hex(input_str: str):
     """
     Convert RGBA input string in the format 'RRR,GGG,BBB,A' to Hex color code.
 
-    Parameters:
-    input_str (str): Input string in the format 'r,g,b,a'
+    Parameters
+    - input_str (str): Input string in the format 'r,g,b,a'
 
-    Returns:
-    str: Hex color code
+    Returns
+    - str: Hex color code
     """
     # handles case when user clears input field
     if not input_str.strip():
@@ -120,3 +120,92 @@ def rgba_input_to_hex(input_str: str):
 
     except:
         return ("Invalid RGB/RGBA format")
+
+
+def tailwind_name_lookup(color: str, tailwind_colors):
+    """
+    Looks up tailwind color class in tailwind dictionary using hex code.
+
+    Parameters
+    - color (str): Input string in the format of tailwind hex code; example: #22c55e.
+    - tailwind_colors: Dictionary of all built in tailwind colors.
+
+    Returns
+    - str: Tailwind color class name; example: green-500.
+    """
+    tailwind_class = "None"
+
+    for key, value in tailwind_colors.items():
+        if value == color:
+            tailwind_class = key
+            break
+        else:
+            tailwind_class = "None"
+
+    return tailwind_class
+
+
+def tailwind_lstrip_name_lookup(color: str, tailwind_colors):
+    """
+    1. Strips both input string and dictionary values of '#'
+    2. Looks up tailwind color class in tailwind dictionary using hex code.
+
+    Parameters
+    - color (str): Input string in the format of tailwind hex code; example: #22c55e.
+    - tailwind_colors: Dictionary of all built in tailwind colors.
+
+    Returns
+    - str: Tailwind color class name; example: green-500.
+    """
+    tailwind_class = "None"
+
+    for key, value in tailwind_colors.items():
+            if value.lstrip("#") == color.lstrip('#'):
+                tailwind_class = key
+                break
+            else:
+                tailwind_class = "None"
+
+    return tailwind_class
+
+
+def tailwind_value_lookup(color: str, tailwind_colors):
+    """
+    Looks up tailwind hex code in tailwind dictionary using tailwind class name.
+
+    Parameters
+    - color (str): Input string in the format of tailwind color class example: green-500.
+    - tailwind_colors: Dictionary of all built in tailwind colors.
+
+    Returns
+    - str: Hex color code.
+    - str: RGBA color code.
+    """
+    tailwind_color = "None"
+
+    for key, value in tailwind_colors.items():
+        if key == color:
+            tailwind_color = value
+            break
+    else:
+        tailwind_color = "Color not found"
+
+    return tailwind_color
+
+
+
+def rgba_output_string(input: str):
+    """
+    Takes in sanitized values and builds whole RGBA(R,B,G,A) string for display
+
+    Parameters
+    - input (str): sanitized color code
+
+    Returns
+    - rgba_string (str): ready to display string with RGBA(R,B,G,A) format
+    """
+    prefix = "RGBA("
+    suffix = ")"
+    rgba_string = prefix + input + suffix
+
+    return rgba_string

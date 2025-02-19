@@ -114,20 +114,10 @@ def get():
 
 @rt("/hex_color")
 def post(color: str):
-    # clean up the string and handle conversion to RGBA
-    color = color.lower()
-    color = string_cleaner(color, " ")
-    rgba_value = hex_to_rgba(color)
+    color = string_cleaner(color, " ").lower()
 
-    # strip the # if present and lookup tailwind class
-    color = string_cleaner(color, "#")
-    for key, value in tailwind_colors.items():
-            if value.lstrip("#") == color:
-                tailwind_hex = key
-                print(tailwind_hex)
-                break
-            else:
-                tailwind_hex = "None"
+    rgba_value = hex_to_rgba(color)
+    tailwind_hex = tailwind_lstrip_name_lookup(color, tailwind_colors)
 
     return Div(
         id="hex-color-display",
@@ -148,24 +138,14 @@ def post(color: str):
 
 @rt("/rgba_color")
 def post(color: str):
-    # clean up the string for conversion
-    color_to_convert = color
-    converted_color = string_cleaner(color_to_convert, " ()RGBArgba")
-    # convert to hex
-    hex_value = rgba_input_to_hex(converted_color)
-    # lookup the tailwind class if any
-    hex_value_low = hex_value.lower()
-    for key, value in tailwind_colors.items():
-        if value == hex_value_low:
-            tailwind_rgba = key
-            break
-        else:
-            tailwind_rgba = "None"
+    color_clean = string_cleaner(color, " ()RGBArgba")
 
-    # build RGBA string output to look nice
-    prefix = "RGBA("
-    suffix = ")"
-    rgba_color = prefix + converted_color + suffix
+    hex_value = rgba_input_to_hex(color_clean)
+    hex_value = hex_value.lower()
+
+    tailwind_rgba = tailwind_name_lookup(hex_value, tailwind_colors)
+
+    rgba_color = rgba_output_string(color_clean)
 
     return Div(
         id="rgba-color-display",
@@ -173,7 +153,7 @@ def post(color: str):
         cls="w-60 h-8 md:h-16",
         style=f"background-color: {rgba_color};",
         ), Div(
-            f"HEX: {hex_value_low}",
+            f"HEX: {hex_value}",
             id="hex-color-value",
             hx_swap_oob=True,
             cls="w-60 h-6 text-gray-100 text-center mx-auto p-1",
@@ -186,17 +166,9 @@ def post(color: str):
 
 @rt("/tailwind_color")
 def post(color: str):
-    color = color.lower()
-    color = string_cleaner(color, " ")
+    color = string_cleaner(color, " ").lower()
 
-    tailwind_color = "None"
-
-    for key, value in tailwind_colors.items():
-        if key == color:
-            tailwind_color = value
-            break
-    else:
-        tailwind_color = "Color not found"
+    tailwind_color = tailwind_value_lookup(color, tailwind_colors)
 
     rgba_value = hex_to_rgba(tailwind_color)
 
