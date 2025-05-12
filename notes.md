@@ -13,9 +13,15 @@ hub
 📦fastHTML_Color_Converter
  ┣ 📂app
  ┃ ┣ 📂static
- ┃ ┃ ┗ 📂css
+ ┃ ┃ ┣ 📂css
  ┃ ┃ ┃ ┣ 📜input.css
  ┃ ┃ ┃ ┗ 📜tailwind.css
+ ┃ ┃ ┗ 📂images
+ ┃ ┃ ┃ ┣ 📜favicon.ico
+ ┃ ┃ ┃ ┣ 📜favicon.png
+ ┃ ┃ ┃ ┗ 📜tailwind_palette.jpg
+ ┃ ┣ 📜colors.py
+ ┃ ┣ 📜functions.py
  ┃ ┗ 📜main.py
  ┣ 📜.gitignore
  ┣ 📜Dockerfile

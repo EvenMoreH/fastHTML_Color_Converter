@@ -11,7 +11,10 @@ app, rt = fast_app(static_path="static") # type: ignore
 
 default_header = Head(
                     Title("Color Converter"),
+                    Meta(charset="UTF-8"),
                     Meta(name="viewport", content="width=device-width, initial-scale=1"),
+                    Meta(name="description", content="insert page description for Search Engines"),
+                    Meta(name="author", content="EvenMoreH"),
                     Script(src="https://unpkg.com/htmx.org"),
                     Link(rel="stylesheet", href="css/tailwind.css"),
                     Link(rel="icon", href="images/favicon.ico", type="image/x-icon"),
@@ -26,7 +29,8 @@ def get():
         Body(
             Div(
                 Span("Color Converter by "),
-                A("EvenMoreH", href="https://github.com/EvenMoreH", cls="text-gray-300 underline hover:scale-105 transition-all duration-250"),
+                A("EvenMoreH", href="https://github.com/EvenMoreH",
+                cls="max-md:text-indigo-200 underline hover:text-indigo-200 hover:scale-105 transition-all duration-250"),
                 cls="text-center fixed top-0 container p-2 bg-zinc-800 w-full rounded flex justify-center items-center space-x-1"
             ),
             # hex code div
@@ -35,7 +39,8 @@ def get():
                     Label("Enter HEX Color Code", cls="label1"),
                     Label("Example: #22c55e", cls="label2"),
                     Input(id="hex-color-input", name="color", type="text", cls="input"),
-                    hx_post="/hex_color",
+                    # hx_post="endpoint" instead of hx_post="/endpoint" uses relative path instead of absolute (allows proxy)
+                    hx_post="hex_color",
                     hx_trigger="input",
                     hx_target="#hex-color-display",
                     cls="form1",
@@ -61,7 +66,8 @@ def get():
                     Label("Enter RGBA Color Code", cls="label1"),
                     Label("Example: 235,92,3,0.85", cls="label2"),
                     Input(id="rgba-color-input", name="color", type="text", cls="input"),
-                    hx_post="/rgba_color",
+                    # hx_post="endpoint" instead of hx_post="/endpoint" uses relative path instead of absolute (allows proxy)
+                    hx_post="rgba_color",
                     hx_trigger="input",
                     hx_target="#rgba-color-display",
                     cls="form2",
@@ -84,10 +90,23 @@ def get():
             # tailwind div
             Div(
                 Form(
-                    Label("Enter Tailwind Color Code", cls="label1"),
+                    Div(
+                        Label(
+                            "Enter",
+                            Button("Tailwind Color Code",
+                                hx_get="palette",
+                                hx_trigger="click",
+                                hx_target="#tailwind-palette",
+                                hx_swap="innerHTML",
+                                cls="max-md:text-indigo-200 pl-[6px] hover:text-indigo-200 hover:scale-105 transition-all 300ms"
+                            ),
+                            cls="flex items-center p-0.5 m-0.5 text-xl md:p-2 md:m-2 md:text-2xl"
+                        )
+                    ),
                     Label("Example: green-500", cls="label2"),
                     Input(id="tailwind-color-input", name="color", type="text", cls="input"),
-                    hx_post="/tailwind_color",
+                    # hx_post="endpoint" instead of hx_post="/endpoint" uses relative path instead of absolute (allows proxy)
+                    hx_post="tailwind_color",
                     hx_trigger="input",
                     hx_target="#tailwind-color-display",
                     cls="form3",
@@ -105,7 +124,11 @@ def get():
                 Div(
                     id="rgba-color-valuee",
                 ),
+
                 cls="div-center",
+            ),
+            Div(
+                id="tailwind-palette",
             ),
             # whole body css:
             cls="body"
@@ -189,7 +212,23 @@ def post(color: str):
         cls="w-60 h-6 text-gray-100 text-center mx-auto p-1",
     ),
 
+@rt("/palette")
+def get():
+    return Div(
+        Img(src="images/tailwind_palette.jpg",
+            type="image/jpg",
+            alt="test1",
+        ),
+        Button("Close",
+            hx_get="close_modal",
+            hx_target="#tailwind-palette",
+            cls="close-palette"),
+        cls="popup",
+    )
 
+@rt("/close_modal")
+def get():
+    return Div("")
 
 if __name__ == '__main__':
     # Important: Use host='0.0.0.0' to make the server accessible outside the container
