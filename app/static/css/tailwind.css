@@ -107,7 +107,7 @@
 }
 
 /*
-! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -659,9 +659,9 @@ video {
   background-color: transparent;
 }
 
-.bg-zinc-800 {
+.bg-zinc-700 {
   --tw-bg-opacity: 1;
-  background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1));
+  background-color: rgb(63 63 70 / var(--tw-bg-opacity, 1));
 }
 
 .p-0\.5 {
@@ -749,8 +749,7 @@ video {
   row-gap: 4rem;
   -moz-column-gap: 2rem;
        column-gap: 2rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(9 9 11 / var(--tw-bg-opacity, 1));
+  background-color: rgba(44,44,44,1);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity, 1));
@@ -877,7 +876,7 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
-  background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1));
+  background-color: rgb(63 63 70 / var(--tw-bg-opacity, 1));
   padding: 0.5rem;
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity, 1));
@@ -911,7 +910,7 @@ video {
   font-size: 1.125rem;
   line-height: 1.75rem;
   --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+  color: rgb(224 231 255 / var(--tw-text-opacity, 1));
 }
 
 @media (min-width: 768px) {

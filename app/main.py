@@ -31,7 +31,7 @@ def get():
                 Span("Color Converter by "),
                 A("EvenMoreH", href="https://github.com/EvenMoreH",
                 cls="max-md:text-indigo-200 underline hover:text-indigo-200 hover:scale-105 transition-all duration-250"),
-                cls="text-center fixed top-0 container p-2 bg-zinc-800 w-full rounded flex justify-center items-center space-x-1"
+                cls="text-center fixed top-0 container p-2 bg-zinc-700 w-full rounded flex justify-center items-center space-x-1"
             ),
             # hex code div
             Div(

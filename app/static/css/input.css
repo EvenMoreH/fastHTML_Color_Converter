@@ -4,7 +4,7 @@
 
 
 .body {
-  @apply font-segoe-ui bg-zinc-950 text-gray-100 max-w-5xl container mx-auto grid
+  @apply font-segoe-ui bg-[rgba(44,44,44,1)] text-gray-100 max-w-5xl container mx-auto grid
   md:grid-cols-2 gap-y-16 md:gap-y-24 gap-x-8 xl:grid-cols-3 transform scale-90 md:transform md:scale-100
 }
 
@@ -17,7 +17,7 @@
 }
 
 .input {
-  @apply bg-zinc-800 text-gray-100 border-gray-100 w-60 h-7 md:h-8 rounded-md p-2
+  @apply bg-zinc-700 text-gray-100 border-gray-100 w-60 h-7 md:h-8 rounded-md p-2
 }
 
 .label1 {
@@ -25,7 +25,7 @@
 }
 
 .label2 {
-  @apply text-gray-400 pb-0.5 mb-0.5 text-lg md:text-xl md:pb-1 md:mb-1
+  @apply text-indigo-100 pb-0.5 mb-0.5 text-lg md:text-xl md:pb-1 md:mb-1
 }
 
 .form1 {
